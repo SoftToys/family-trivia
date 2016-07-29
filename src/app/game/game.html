@@ -1,0 +1,31 @@
+<div class="container" *ngIf="items">
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="current" aria-valuemin="1" [attr.aria-valuemax]="items.length"
+      [style.width.%]="completionPercents">
+      {{completionPercents}}%
+    </div>
+  </div>
+
+  <div *ngIf="current < items.length">
+    <div class="row">
+      <div class="panel panel-default">
+        <div class="h1 col-md-12">
+          <div class="h1 col-md-1" [ngClass]="{'bg-info' : items[current].status <= 1, 'bg-danger': items[current].status == 2,'bg-success': items[current].status == 3 }">#{{current+1}}</div>
+          <div class="h1 col-md-11">{{items[current].questionTxt}}<i *ngIf="items[current].status > 1" class="fa" [ngClass]="{'fa-check': items[current].status == 3, 'fa-exclamation-triangle' : items[current].status == 2}" aria-hidden="true"></i></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 tr-answer" *ngFor="let answer of items[current].answers;let i = index">
+        <div class="panel panel-primary" (click)="answerAttempt(answer)" [ngClass]="{'panel-success': items[current].status == 3 && answer.isCorrect}">
+          <div class="panel-heading" >
+            #{{i+1}}. {{answer.txt}}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="current>0" class="btn btn-link pull-left" (click)='back()'>&lt;&lt;back</div>
+   <div *ngIf="items[current] && items[current].status == 3" class="btn btn-link pull-right" (click)='next()'>next&gt;&gt;</div>
+</div>

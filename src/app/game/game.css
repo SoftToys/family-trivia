@@ -1,0 +1,8 @@
+.tr-answer:hover{
+  opacity:1;
+  cursor: pointer;
+}
+
+.tr-answer{
+  opacity:0.8;
+}
