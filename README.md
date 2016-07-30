@@ -1,6 +1,6 @@
 # family-trivia
 ###Create you own composed trivia Game.
-
+#####created and edited in vscode
 
 make sure you have the prerequisites installed: Node, Npm, Typescript, Typings 
 ##to run
@@ -9,4 +9,4 @@ make sure you have the prerequisites installed: Node, Npm, Typescript, Typings
 
 open your browser http://localhost:3000/
 
-created and edited in vscode
+
