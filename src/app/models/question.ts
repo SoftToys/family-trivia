@@ -2,6 +2,7 @@
  * name
  */
 export class Question {
-  constructor(public txt:string) {
+  constructor(public txt?: string) {
   }
+
 }
