@@ -11,6 +11,7 @@ import {TriviaGame} from '../models/Trivia-Game';
 })
 export class TriviaItemEditComponent implements OnInit {
 
+  @Input() index: number;
   @Output() itemSaved = new EventEmitter<TriviaItem>();
   @Input() item: TriviaItem;
   currentAnswer: Answer;
@@ -20,7 +21,6 @@ export class TriviaItemEditComponent implements OnInit {
 
   ngOnInit() {
     this.item = this.item || TriviaItem.CreateDefault();
-
   }
 
   addCurrentAnswer() {
