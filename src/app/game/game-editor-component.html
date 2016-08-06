@@ -14,6 +14,6 @@
     </ul>
   </div>
   <trivia-item-edit *ngIf="game.Name && game.Name.length > 2" (itemSaved)="addItem($event)" [index]="game._items ? (game._items.length+1) : 1"></trivia-item-edit>
-  <button [disabled]="game._items.length < 1" class="btn btn-success " (click)='save()'>Save</button>
+  <button [disabled]="game._items.length < 1" class="btn btn-success " (click)='save()'>Save Game</button>
 
 </div>
