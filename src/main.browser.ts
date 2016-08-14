@@ -5,7 +5,8 @@ import {HTTP_PROVIDERS} from '@angular/http';
 
 import {APP_ROUTER_PROVIDERS} from './app/app.routes';
 import {App} from './app/app';
-import {QuestionsRepositoryService} from './app/services/questions-repo-service'
+import {QuestionsRepositoryService} from './app/services/questions-repo-service';
+import {QuestionsHttpRepositoryService} from './app/services/questions-repo-http-service';
 
 // enableProdMode()
 
@@ -13,6 +14,7 @@ bootstrap(App, [
   HTTP_PROVIDERS,
   APP_ROUTER_PROVIDERS,
   { provide: LocationStrategy, useClass: HashLocationStrategy },
-  QuestionsRepositoryService
+  QuestionsRepositoryService,
+  QuestionsHttpRepositoryService
 ])
   .catch(err => console.error(err));

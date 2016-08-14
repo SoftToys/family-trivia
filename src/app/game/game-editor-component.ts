@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FORM_DIRECTIVES, FORM_PROVIDERS } from '@angular/common';
 import {QuestionsRepositoryService} from '../services/questions-repo-service';
+import {QuestionsHttpRepositoryService } from '../services/questions-repo-http-service';
+
+
 import {Question} from '../models/question';
 import {TriviaItem, Status} from '../models/Trivia-Item';
 import {Answer} from '../models/answer';
@@ -27,7 +30,7 @@ export class GameEditor implements OnInit {
   /**
    *
    */
-  constructor(private _questionRepo: QuestionsRepositoryService) {
+  constructor(private _questionRepo: QuestionsHttpRepositoryService) {
     this.game = new TriviaGame('amir');
   }
 
@@ -41,7 +44,9 @@ export class GameEditor implements OnInit {
 
   }
   save(){
-    this._questionRepo.addGame(this.game);
+    this._questionRepo.addGame(this.game)
+      .subscribe(arg => {});
+
   }
 
 

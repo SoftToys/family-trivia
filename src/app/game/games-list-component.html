@@ -1,0 +1,11 @@
+<div class="container">
+  <div *ngIf="userGames">{{userGames.length}}</div>
+
+  <div *ngFor="let game of userGames">
+    <div>{{game._name}}
+      <a [routerLink]="['/game', game._id]" class="btn btn-info">Open
+      </a>
+    </div>
+
+  </div>
+</div>

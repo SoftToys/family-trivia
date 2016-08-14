@@ -4,19 +4,20 @@ import {Question} from '../models/question';
 import {TriviaItem} from '../models/Trivia-Item';
 import {TriviaGame} from '../models/Trivia-game';
 import {Answer} from '../models/answer';
-import { Http, Response } from '@angular/http';
+import { Http, Response ,RequestOptionsArgs} from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { Injectable }     from '@angular/core';
 
 export interface IQuestionsRepositoryService {
-  getTriviaGame(id: number): Promise<TriviaGame>;
-  addGame(newGame: TriviaGame): number
+  getTriviaGame(id: string): Observable<TriviaGame>;
+  getTriviaGames(): Observable<TriviaGame[]>;
+  addGame(newGame: TriviaGame): Observable<string>;
 }
 
 @Injectable()
-export class QuestionsRepositoryService implements IQuestionsRepositoryService {
+export class QuestionsHttpRepositoryService implements IQuestionsRepositoryService {
   _mockGame: TriviaGame;
-  constructor() {
+  constructor(private _http: Http) {
 
     this._mockGame = new TriviaGame('amir');
     this._mockGame.AddItem(new TriviaItem(new Question("Some Question about some shit 1?"), [new Answer('Some Answer about some shit 1', true), new Answer('Some Answer about some shit 2'), new Answer('Some Answer about some shit 3')]));
@@ -26,7 +27,10 @@ export class QuestionsRepositoryService implements IQuestionsRepositoryService {
 
   }
 
-  getTriviaGame(id: number): Promise<TriviaGame> {
+  getTriviaGame(id: string): Observable<TriviaGame> {
+
+    return this._http.get(`http://localhost:5000/api/gamemanage/${id}`)
+      .map((res: Response) => Object.assign(new TriviaGame("fg"),res.json()));
 
     // var a :ArrayLike<TriviaItem> = [
     //       new TriviaItem(new Question("q 1"), [new Answer('answer 1'), new Answer('answer 2')]),
@@ -37,13 +41,19 @@ export class QuestionsRepositoryService implements IQuestionsRepositoryService {
     //       new TriviaItem(new Question("q 2"), [new Answer('answer 3'), new Answer('answer 4')])
     //       ]);
 
-    return Promise.resolve(this._mockGame);
+    //return Promise.resolve(this._mockGame);
     //return Observable.from(a);
     //o.
     //return Observable.from(items);
   }
-  addGame(newGame: TriviaGame): number {
-    this._mockGame = newGame;
-    return 1;
+  addGame(newGame: TriviaGame): Observable<string> {
+
+    return this._http.post('http://localhost:5000/api/gamemanage', newGame)
+      .map((res: Response) => res.json());
+  }
+  getTriviaGames(): Observable<TriviaGame[]> {
+
+    return this._http.get(`http://localhost:5000/api/gamemanage`)
+      .map((res: Response) => <TriviaGame[]>res.json());
   }
 }

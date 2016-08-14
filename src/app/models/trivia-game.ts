@@ -12,6 +12,7 @@ export class TriviaGame {
   _items: TriviaItem[];
   _owner: string;
   _name: string;
+  _id: string;
 
   /**
    *

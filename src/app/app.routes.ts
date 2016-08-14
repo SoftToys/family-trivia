@@ -12,7 +12,7 @@ const routes: RouterConfig = [
   { path: '', redirectTo: 'home', terminal: true },
   { path: 'home', component: Home },
   { path: 'createGame', component: GameEditor },
-  { path: 'game', component: Game },
+  { path: 'game/:gameId', component: Game },
   { path: 'about', component: About },
   {
     path: 'github', component: RepoBrowser, children: [
