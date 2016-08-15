@@ -8,13 +8,14 @@ import {TriviaItem, Status} from '../models/Trivia-Item';
 import {Answer} from '../models/answer';
 import {TriviaGame} from '../models/Trivia-Game';
 import {TriviaItemPreviewComponent} from './trivia-item-preview'
-import {TriviaItemEditComponent} from './trivia-item-edit'
+import {TriviaItemEditComponent} from './trivia-item-edit';
+import {TakePipe} from '../shared/pipes';
 
 
 @Component({
   moduleId: module.id,
   selector: 'game-list',
-  pipes: [],
+  pipes: [TakePipe],
   providers: [FORM_PROVIDERS],
   directives: [TriviaItemPreviewComponent, TriviaItemEditComponent, ROUTER_DIRECTIVES],
 
