@@ -11,7 +11,8 @@ import {RepoDetail} from './github/repo-detail/repo-detail';
 const routes: RouterConfig = [
   { path: '', redirectTo: 'home', terminal: true },
   { path: 'home', component: Home },
-  { path: 'createGame', component: GameEditor },
+  { path: 'editGame/:gameId', component: GameEditor },
+  { path: 'creatGame', component: GameEditor },
   { path: 'game/:gameId', component: Game },
   { path: 'about', component: About },
   {

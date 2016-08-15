@@ -4,7 +4,7 @@ import {Question} from '../models/question';
 import {TriviaItem} from '../models/Trivia-Item';
 import {TriviaGame} from '../models/Trivia-game';
 import {Answer} from '../models/answer';
-import { Http, Response ,RequestOptionsArgs} from '@angular/http';
+import { Http, Response, RequestOptionsArgs} from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { Injectable }     from '@angular/core';
 
@@ -30,7 +30,7 @@ export class QuestionsHttpRepositoryService implements IQuestionsRepositoryServi
   getTriviaGame(id: string): Observable<TriviaGame> {
 
     return this._http.get(`http://localhost:5000/api/gamemanage/${id}`)
-      .map((res: Response) => Object.assign(new TriviaGame("fg"),res.json()));
+      .map((res: Response) => Object.assign(new TriviaGame("fg"), res.json()));
 
     // var a :ArrayLike<TriviaItem> = [
     //       new TriviaItem(new Question("q 1"), [new Answer('answer 1'), new Answer('answer 2')]),

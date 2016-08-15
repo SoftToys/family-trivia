@@ -1,27 +1,25 @@
 <nav>
-	<a [routerLink]="['/']">
+  <a [routerLink]="['/']">
     Home
-  </a>
-
-  |
-	<a [routerLink]="['/about']">
+  </a> |
+  <a [routerLink]="['/about']">
     About
   </a>
   <a [routerLink]="['/game']">
     Game
   </a>
-	<a [routerLink]="['/createGame']">
+  <a [routerLink]="['/creatGame']">
     create Game
-  </a>
-
-  |
-	<a [routerLink]="['/github', 'angular']">
+  </a> |
+  <a [routerLink]="['/github', 'angular']">
     Github Repos
   </a>
 </nav>
 
 <main>
-	<router-outlet></router-outlet>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </main>
 
 
