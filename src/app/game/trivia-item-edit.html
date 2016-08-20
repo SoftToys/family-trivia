@@ -17,7 +17,7 @@
 
 
 
-    <form class="form-inline panel panel-default container">
+    <form class="form-inline panel panel-default">
       <div class="form-group">
         <label for="answer">Answer:</label>
         <input type="text" [(ngModel)]="currentAnswer.txt" placeholder="answer" id='answer' class="form-control" />
@@ -26,7 +26,7 @@
         <label for="correct">Is the Correct answer:</label>
         <input type="checkbox" [(ngModel)]="currentAnswer.isCorrect" id='correct' class="checkbox-inline" />
       </div>
-      <button class="btn btn-default" (click)="addCurrentAnswer()">Save Answer</button>
+      <button class="btn" (click)="addCurrentAnswer()">Save Answer</button>
     </form>
 
 

@@ -9,6 +9,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
   templateUrl: './app.html',
 })
 export class App {
+  appName: string = 'Family Trivia';
   constructor() {}
 
 }
