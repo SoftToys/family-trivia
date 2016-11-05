@@ -1,12 +1,13 @@
+import { IdentityService } from './../identity.service';
 
 //import {TriviaItem, Question, Answer } from '../models/models';
-import {Question} from '../models/question';
-import {TriviaItem} from '../models/Trivia-Item';
-import {TriviaGame} from '../models/Trivia-game';
-import {Answer} from '../models/answer';
-import { Http, Response, RequestOptionsArgs} from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
-import { Injectable }     from '@angular/core';
+import { Question } from '../models/question';
+import { TriviaItem } from '../models/Trivia-Item';
+import { TriviaGame } from '../models/trivia-game';
+import { Answer } from '../models/answer';
+import { Http, Response, RequestOptionsArgs, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
 
 export interface IQuestionsRepositoryService {
   getTriviaGame(id: string): Observable<TriviaGame>;
@@ -16,20 +17,18 @@ export interface IQuestionsRepositoryService {
 
 @Injectable()
 export class QuestionsHttpRepositoryService implements IQuestionsRepositoryService {
-  _mockGame: TriviaGame;
-  constructor(private _http: Http) {
+  constructor(private _http: Http, private _identityService: IdentityService) {
+  }
 
-    this._mockGame = new TriviaGame('amir');
-    this._mockGame.AddItem(new TriviaItem(new Question("Some Question about some shit 1?"), [new Answer('Some Answer about some shit 1', true), new Answer('Some Answer about some shit 2'), new Answer('Some Answer about some shit 3')]));
-    this._mockGame.AddItem(new TriviaItem(new Question("Some Question about some shit 2?"), [new Answer('Some Answer about some shit 2'), new Answer('Some Answer about some shit 1', true), new Answer('Some Answer about some shit 3')]));
-    this._mockGame.AddItem(new TriviaItem(new Question("Some Question about some shit 3?"), [new Answer('Some Answer about some shit  3'), new Answer('Some Answer about some shit  4', true)]));
-
-
+  private createAuthorizationHeader(headers: Headers) {
+    headers.append('Authorization', `Bearer ${this._identityService.token}`);
   }
 
   getTriviaGame(id: string): Observable<TriviaGame> {
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
 
-    return this._http.get(`http://localhost:5000/api/gamemanage/${id}`)
+    return this._http.get(`http://localhost:5000/api/gamemanage/${id}`, { headers: headers })
       .map((res: Response) => Object.assign(new TriviaGame("fg"), res.json()));
 
     // var a :ArrayLike<TriviaItem> = [
@@ -47,13 +46,15 @@ export class QuestionsHttpRepositoryService implements IQuestionsRepositoryServi
     //return Observable.from(items);
   }
   addGame(newGame: TriviaGame): Observable<string> {
-
-    return this._http.post('http://localhost:5000/api/gamemanage', newGame)
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this._http.post('http://localhost:5000/api/gamemanage', newGame, { headers: headers })
       .map((res: Response) => res.json());
   }
   getTriviaGames(): Observable<TriviaGame[]> {
-
-    return this._http.get(`http://localhost:5000/api/gamemanage`)
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this._http.get(`http://localhost:5000/api/gamemanage`, { headers: headers })
       .map((res: Response) => <TriviaGame[]>res.json());
   }
 }

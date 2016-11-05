@@ -3,7 +3,7 @@
   <div class="container" *ngIf="game">
     <div class="form-group">
       <label for="gameName">Name:</label>
-      <input type="text" placeholder="name your game!" required="required" minlength="2" [(ngModel)]="game.Name" id='gameName'
+      <input type="text" placeholder="name your game!" required="required" minlength="2" [ngModelOptions]="{standalone: true}" [(ngModel)]="game.Name" id='gameName'
         class="form-control" />
     </div>
 

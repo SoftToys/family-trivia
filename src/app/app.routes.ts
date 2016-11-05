@@ -1,36 +1,27 @@
-import { provideRouter, RouterConfig } from '@angular/router';
+import { AuthGuard } from './auth.guard';
+import { GameComponent } from './game/game-component';
+import { GameEditorComponent } from './game/game-editor-component';
+import { GamesListComponent } from './game/games-list-component';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home';
+import { AboutComponent } from './about';
+import { NoContentComponent } from './no-content';
 
-import {About} from './about/about';
-import {Home} from './home/home';
-import {Game} from './game/game-component';
-import {GameEditor} from './game/game-editor-component';
-import {RepoBrowser} from './github/repo-browser/repo-browser';
-import {RepoList} from './github/repo-list/repo-list';
-import {RepoDetail} from './github/repo-detail/repo-detail';
-import {GamesList} from './game/games-list-component';
+import { DataResolver } from './app.resolver';
 
 
-const routes: RouterConfig = [
-  { path: '', redirectTo: 'home', terminal: true },
-  { path: 'home', component: Home },
-  { path: 'myGames', component: GamesList },
-
-  { path: 'editGame/:gameId', component: GameEditor },
-  { path: 'createGame', component: GameEditor },
-  { path: 'game/:gameId', component: Game },
-  {
-    path: 'github', component: RepoBrowser, children: [
-      {
-        path: ':org', component: RepoList, children: [
-          { path: ':repo', component: RepoDetail },
-          { path: '', component: RepoDetail }
-        ]
-      },
-      { path: '', component: RepoList }
-    ]
-  }
-];
-
-export const APP_ROUTER_PROVIDERS = [
-  provideRouter(routes)
+export const ROUTES: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'mygames', component: GamesListComponent, canActivate: [AuthGuard] },
+  { path: 'editgame/:gameId', component: GameEditorComponent, canActivate: [AuthGuard] },
+  { path: 'creategame', component: GameEditorComponent, canActivate: [AuthGuard] },
+  { path: 'game/:gameId', component: GameComponent, canActivate: [AuthGuard] },
+  // {
+  //   path: 'detail', loadChildren: () => System.import('./+detail').then((comp: any) => {
+  //     return comp.default;
+  //   })
+  //   ,
+  // },
+  { path: '**', component: NoContentComponent },
 ];

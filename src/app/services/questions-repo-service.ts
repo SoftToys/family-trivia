@@ -2,7 +2,7 @@
 //import {TriviaItem, Question, Answer } from '../models/models';
 import {Question} from '../models/question';
 import {TriviaItem} from '../models/Trivia-Item';
-import {TriviaGame} from '../models/Trivia-game';
+import {TriviaGame} from '../models/trivia-game';
 import {Answer} from '../models/answer';
 import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';

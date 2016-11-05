@@ -3,7 +3,7 @@
 
     <div class="form-group">
       <label for="question">#{{index}} Question:</label>
-      <input [(ngModel)]="item._question.txt" placeholder="question text.." id='question' class="form-control" />
+      <input [(ngModel)]="item._question.txt" [ngModelOptions]="{standalone: true}" placeholder="question text.." id='question' class="form-control" />
     </div>
 
     <div *ngIf="item.answers.length >0">
@@ -20,11 +20,11 @@
     <form class="form-inline panel panel-default">
       <div class="form-group">
         <label for="answer">Answer:</label>
-        <input type="text" [(ngModel)]="currentAnswer.txt" placeholder="answer" id='answer' class="form-control" />
+        <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="currentAnswer.txt" placeholder="answer" id='answer' class="form-control" />
       </div>
       <div class="form-group">
         <label for="correct">Is the Correct answer:</label>
-        <input type="checkbox" [(ngModel)]="currentAnswer.isCorrect" id='correct' class="checkbox-inline" />
+        <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="currentAnswer.isCorrect" id='correct' class="checkbox-inline" />
       </div>
       <button class="btn" (click)="addCurrentAnswer()">Save Answer</button>
     </form>

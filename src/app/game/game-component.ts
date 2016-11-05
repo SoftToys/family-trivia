@@ -5,19 +5,16 @@ import {QuestionsHttpRepositoryService}  from '../services/questions-repo-http-s
 import {Question} from '../models/question';
 import {TriviaItem, Status} from '../models/Trivia-Item';
 import {Answer} from '../models/answer';
-import {TriviaGame} from '../models/Trivia-Game';
+import {TriviaGame} from '../models/trivia-game';
 
 
 @Component({
   moduleId: module.id,
   selector: 'game',
-  pipes: [],
-  providers: [],
-  directives: [],
   styleUrls: ['./game-component.css'],
   templateUrl: 'game-component.html'
 })
-export class Game implements OnInit {
+export class GameComponent implements OnInit {
   current: number = 0;
   game: TriviaGame;
   gameId: string;

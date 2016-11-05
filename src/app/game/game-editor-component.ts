@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FORM_DIRECTIVES, FORM_PROVIDERS } from '@angular/common';
 import {QuestionsRepositoryService} from '../services/questions-repo-service';
 import {QuestionsHttpRepositoryService } from '../services/questions-repo-http-service';
 import { ActivatedRoute, Router} from '@angular/router';
@@ -7,7 +6,7 @@ import { ActivatedRoute, Router} from '@angular/router';
 import {Question} from '../models/question';
 import {TriviaItem, Status} from '../models/Trivia-Item';
 import {Answer} from '../models/answer';
-import {TriviaGame} from '../models/Trivia-Game';
+import {TriviaGame} from '../models/trivia-game';
 import {TriviaItemPreviewComponent} from './trivia-item-preview'
 import {TriviaItemEditComponent} from './trivia-item-edit'
 
@@ -15,13 +14,10 @@ import {TriviaItemEditComponent} from './trivia-item-edit'
 @Component({
   moduleId: module.id,
   selector: 'game',
-  pipes: [],
-  providers: [FORM_PROVIDERS],
-  directives: [TriviaItemPreviewComponent, TriviaItemEditComponent, FORM_DIRECTIVES],
-
-  templateUrl: 'game-editor-component.html'
+  templateUrl: 'game-editor-component.html',
+  styleUrls: ['./game-component.css']
 })
-export class GameEditor implements OnInit {
+export class GameEditorComponent implements OnInit {
 
   gameId: string;
   game: TriviaGame;
