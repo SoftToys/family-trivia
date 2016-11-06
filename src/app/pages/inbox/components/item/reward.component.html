@@ -1,0 +1,27 @@
+<div class="container">
+	<div class="row"></div>
+	<div *ngIf="reward && reward.branches && (reward.branches.length > 0)">
+		<div class="alert alert-warning" role="alert">
+			<strong>Applies only to branches: </strong><span>{{getBranchesNames().join(', ')}}</span>
+		</div>
+	</div>
+
+	<div class="rewards-container card">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 h4">
+					{{reward.promoTxt}}
+				</div>
+			</div>
+			<div>
+				<a *ngIf="reward.canClaim" class="btn btn-success" href="#claim-dialog">Claim - Business use only</a>
+			</div>
+
+			<div class="row">
+				<span *ngFor="let point of pointsArray; let i = index" class="circle reward-point" [ngClass]="{'reward-spin': reward.isCompleted, 'circle-fill': (!reward.isCompleted &&  point <=  reward.points)}">{{(point <=  reward.points) ? '' : point}}</span>
+			</div>
+		</div>
+	</div>
+
+
+</div>

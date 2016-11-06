@@ -1,40 +1,33 @@
-import { AuthGuard } from './auth.guard';
-import { MessageBusService } from './message-bus.service';
 import { IdentityService } from './identity.service';
-import { EnvConfig } from './globals';
-import { HomeComponent } from './home/home.component';
-import { QuestionsHttpRepositoryService } from './services/questions-repo-http-service';
-import { TriviaItemPreviewComponent } from './game/trivia-item-preview';
-import { TakePipe } from './shared/pipes';
-import { TriviaItemEditComponent } from './game/trivia-item-edit';
-import { GameEditorComponent } from './game/game-editor-component';
-import { GamesListComponent } from './game/games-list-component';
-import { GameComponent } from './game/game-component';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
-import { FacebookService } from 'ng2-facebook-sdk/dist';
 
 /*
  * Platform and Environment providers/directives/pipes
  */
 import { ENV_PROVIDERS } from './environment';
-import { ROUTES } from './app.routes';
+import { routing } from './app.routing';
+
 // App is our top level component
-import { AppComponent } from './app.component';
-import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, InternalStateType } from './app.service';
-import { NoContentComponent } from './no-content';
-import { XLarge } from './home/x-large';
+import { App } from './app.component';
+import { AppState, InteralStateType } from './app.service';
+import { GlobalState } from './global.state';
+import { NgaModule } from './theme/nga.module';
+import { PagesModule } from './pages/pages.module';
+import { FacebookService } from 'ng2-facebook-sdk/dist';
+import { AuthGuard } from './auth.guard';
+import { MessageBusService } from './message-bus.service';
+import { EnvConfig } from './globals';
 
 // Application wide providers
 const APP_PROVIDERS = [
-  ...APP_RESOLVER_PROVIDERS,
   AppState,
-  QuestionsHttpRepositoryService,
+  GlobalState,
+  IdentityService,
   EnvConfig,
   IdentityService,
   MessageBusService,
@@ -43,7 +36,7 @@ const APP_PROVIDERS = [
 ];
 
 type StoreType = {
-  state: InternalStateType,
+  state: InteralStateType,
   restoreInputValues: () => void,
   disposeOldHosts: () => void
 };
@@ -52,32 +45,30 @@ type StoreType = {
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
 @NgModule({
-  bootstrap: [AppComponent],
+  bootstrap: [App],
   declarations: [
-    AppComponent,
-    HomeComponent,
-    NoContentComponent,
-    GameComponent,
-    GamesListComponent,
-    GameEditorComponent,
-    TriviaItemEditComponent,
-    TriviaItemPreviewComponent,
-    XLarge,
-    TakePipe
+    App
   ],
   imports: [ // import Angular's modules
     BrowserModule,
-    FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true })
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgaModule.forRoot(),
+    PagesModule,
+    routing
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS
   ]
 })
+
 export class AppModule {
-  constructor(public appRef: ApplicationRef, public appState: AppState) { }
+
+  constructor(public appRef: ApplicationRef, public appState: AppState) {
+  }
 
   hmrOnInit(store: StoreType) {
     if (!store || !store.state) return;
@@ -89,7 +80,6 @@ export class AppModule {
       let restoreInputValues = store.restoreInputValues;
       setTimeout(restoreInputValues);
     }
-
     this.appRef.tick();
     delete store.state;
     delete store.restoreInputValues;
@@ -113,6 +103,4 @@ export class AppModule {
     store.disposeOldHosts();
     delete store.disposeOldHosts;
   }
-
 }
-

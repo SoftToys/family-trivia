@@ -21,8 +21,8 @@ export class IdentityService {
   private _decodedToken: any;
 
   constructor(private router: Router, private _http: Http, private config: EnvConfig, private facebook: FacebookService, private _bus: MessageBusService) {
-    this.icon = localStorage.getItem('w.icon') || IMAGES_ROOT + '/theme/no-photo.png';
-    this.token = localStorage.getItem('w.token');
+    this.icon = localStorage.getItem('triv.icon') || IMAGES_ROOT + '/theme/no-photo.png';
+    this.token = localStorage.getItem('triv.token');
 
     _bus.events.subscribe((e: IMessage) => {
       if (e.eventId === Events.HttpError && e.data.status === 401) {
@@ -39,6 +39,12 @@ export class IdentityService {
     }
     console.log(`isRegistered prop: ${registered}`);
     return registered;
+  }
+  get userId(): string {
+    if (this._decodedToken) {
+      return this._decodedToken['Id'];
+    }
+    return '';
   }
 
   get token(): string {
@@ -76,6 +82,7 @@ export class IdentityService {
   }
   public logout(error?: any): void {
     this.token = '';
+    this.icon = IMAGES_ROOT + '/theme/no-photo.png';
     this.router.navigate(['/']);
   }
 

@@ -18,7 +18,8 @@ export class AuthGuard implements CanActivate {
 
     //if (state.url !== '/auth' && !this.authService.isAuthenticated()) {
     if (!this.authService.isAuthenticated()) {
-      this.authService.loginFacebook();
+      this.router.navigate(['/login']);
+      //this.authService.loginFacebook();
       return false;
     }
     return true;

@@ -1,0 +1,38 @@
+<div class="receipt receipt-content-wrapper">
+	<div style="text-align:center" class="profile-image">
+		<img style="max-width:220px" height="80" border="0" alt="" class="businessImg" [src]="receipt.business.iconName">
+	</div>
+	<div class="h1" style="text-align:center">
+		<span class="currency_symbol">{{receipt.currencySymbol}}</span>
+		<span class="total">{{receipt.total}}</span>
+	</div>
+	<div style="border-top: 1px dashed rgb(224, 225, 226);">
+		<img width="1" height="1" border="0" alt="" style="line-height:0;font-size:0" src="./Weezmo_files/dash.png">
+	</div>
+	<div>
+		<div class="container">
+			<div *ngFor="let item of receipt.receiptItems" class="row" style="margin-top: 10px;">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">{{item.price}}</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">{{item.quantity}} x {{item.name}}</div>
+			</div>
+		</div>
+	</div>
+	<div style="border-top: 1px dashed rgb(224, 225, 226);">
+		<img width="1" height="1" border="0" alt="" style="line-height:0;font-size:0">
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 total">{{receipt.total}}</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 w-right ct text-right">סה"כ לתשלום</div>
+		</div>
+	</div>
+
+
+
+	<div class="container">
+		<div style="border-top: 1px solid rgb(224, 225, 226);"></div>
+		<div class="row" style="text-align:center">
+			<a class="ct" [href]="'http://weezmo-staging.azurewebsites.net/r.html?q=' + receipt.receiptId" target="_blank" style="margin:auto auto">חשבונית דיגיטלית</a>
+		</div>
+	</div>
+</div>

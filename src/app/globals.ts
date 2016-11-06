@@ -5,7 +5,7 @@
 export class EnvConfig {
 
   get baseUrl(): string {
-    console.log("ENV!!!" + ENV);
+    console.log('ENV!!!' + ENV);
     if ('production' === ENV) {
       return '';
     }
@@ -21,8 +21,8 @@ export class EnvConfig {
   }
 }
 
-export const IMAGES_ROOT= '/assets/img';
+export const IMAGES_ROOT = '/assets/img';
 
 export const storageKeys = {
-  Language: "lang"
+  Language: 'lang'
 };

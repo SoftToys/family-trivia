@@ -1,0 +1,43 @@
+<!--<ba-card bacardclass="with-scroll" title="Basic Example">-->
+<!--div bacardblur="" zoom-in="" class="animated fadeIn card"-->
+	<div class="row mail-client-container transparent">
+		<div class="col-md-12">
+			<div ba-panel ba-panel-class="xmedium-panel mail-panel">
+				<div class="mail-navigation-container" [ngClass]="{'expanded' : !layout.navigationCollapsed}">
+					<div class="text-center">
+					</div>
+					<div *ngFor="let t of tabs" class="mail-navigation" [ngClass]="{'active': activeTab == t.name }" (click)="activeTab = t.name;"
+						[routerLink]="['list',{'label':t.label}]">
+						<div lass="mail-navigation">
+							{{t.name}}<span *ngIf="t.newItems" class="new-mails">{{t.newItems}}</span>
+						</div>
+					</div>
+
+					<div class="labels">
+						<div class="labels-title">
+						</div>
+						<div class="labels-container">
+							<div class="label-item">
+								<span class="tag label work">Work</span>
+							</div>
+							<div class="label-item">
+								<span class="tag label family">Family</span>
+							</div>
+							<div class="label-item">
+								<span class="tag label friend">Friend</span>
+							</div>
+							<div class="label-item">
+								<span class="tag label study">Study</span>
+							</div>
+						</div>
+					</div>
+					<div class="add-label-container">
+						<i class="ion-plus-round"></i><span class="label-input-stub">Add new label</span>
+					</div>
+				</div>
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+	</div>
+<!--/div-->
+<!--</ba-card>-->

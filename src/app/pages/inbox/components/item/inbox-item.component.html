@@ -1,0 +1,87 @@
+<div *ngIf="item" class="message-container" [ngClass]="{'expanded': layout.navigationCollapsed}">
+	<div class="message">
+		<div class="row">
+			<div class="toggle-navigation-container detail-page">
+				<a href class="collapse-navigation-link ion-navicon" (click)="layout.navigationCollapsed=!layout.navigationCollapsed"></a>
+			</div>
+			<button [routerLink]="['../list']" type="button" class="back-button btn btn-default btn-with-icon"><i
+          class="ion-chevron-left"></i>Back
+      </button>
+		</div>
+		<div class="person-info row">
+			<div class="col-lg-3 col-md-12  no-padding">
+				<img [src]="item.icon" class="human-picture">
+
+				<div class="name">
+					<h2 class="name-h">{{item.name}}</h2>
+					<div>
+						<span class="mail-tag tag label {{item.tag}}">{{item.tag}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-xs-12 no-padding">
+				<div class="contact-info phone-email">
+					<div>
+						<i class="ion-iphone"></i>
+						<span class="phone">{{item.branch.phone}}</span>
+					</div>
+					<div>
+						<i class="ion-email"></i>
+						<span class="email">{{item.email}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-md-6 col-xs-12 no-padding">
+				<div class="contact-info position-address">
+					<div>
+						<span class="position">{{item.position}}</span>
+					</div>
+					<div>
+						<span class="address">{{item.branch.address}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div *ngIf="item.bodyItem && item.bodyItem.constructor.name == 'Receipt'" class="col-lg-3 col-md-6 col-xs-12 no-padding">
+				<h1 [title]="(item.bodyItem.starred ? 'Un' : '') + 'star this Receipt'"><i [ngClass]="item.bodyItem.starred ? 'fa fa fa-star' : 'fa fa fa-star-o'"></i></h1>
+			</div>
+		</div>
+		<div class="row">
+		</div>
+		<div class="line"></div>
+		<div class="message-details">
+			<span class="date">{{item.date | date : 'h:mm a MMMM d '}}</span>
+		</div>
+		<div class="line"></div>
+		<div ng-bind-html="item.body" class="message-body">
+
+		</div>
+		<div class="line"></div>
+		<div class="attachment" *ngIf="item.attachment">
+			<span class="file-links">1 Attachment - <a href>View</a> | <a href>Download</a></span>
+			<div>
+				<i class="file-icon ion-document"></i>
+				<span class="file-name">{{item.attachment}}</span>
+			</div>
+		</div>
+		<div class="line" *ngIf="item.attachment"></div>
+		<div *ngIf="item.bodyItem && item.bodyItem.constructor.name == 'Receipt'" class="item-container message-details">
+			<receipt [receipt]='item.bodyItem'></receipt>
+		</div>
+		<div *ngIf="item.bodyItem && item.bodyItem.constructor.name == 'Reward'" class="item-container">
+			<reward [reward]='item.bodyItem'></reward>
+		</div>
+		<div class="answer-container">
+			<!--<button type="button" class="btn btn-with-icon" (click)="tabCtrl.showCompose(item.subject,item.email,'')"><i class="ion-reply"></i>Reply</button>
+      <button type="button" class="btn btn-with-icon" (click)="tabCtrl.showCompose(item.subject,'',item.body)"><i class="ion-forward"></i>Forward</button>-->
+			<button type="button" class="btn btn-with-icon"><i class="ion-printer"></i>Print</button>
+			<button type="button" class="btn btn-with-icon"><i class="ion-android-remove-circle"></i>Spam</button>
+			<button type="button" class="btn btn-with-icon"><i class="ion-android-delete"></i>Delete</button>
+		</div>
+
+	</div>
+	<div *ngIf="!item">
+		<h5 [ngClass]="text-center">Nothing to show</h5>
+	</div>
+</div>

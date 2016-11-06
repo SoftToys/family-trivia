@@ -1,0 +1,56 @@
+<div class="side-message-navigation" [ngClass]="{'expanded': layout.navigationCollapsed}">
+	<div class="mail-messages-control side-message-navigation-item">
+		<div class="toggle-navigation-container">
+			<a href class="collapse-navigation-link ion-navicon" (click)="toggleNav()"></a>
+		</div>
+		<label class="checkbox-inline custom-checkbox nowrap">
+      <input type="checkbox" id="inlineCheckbox01" value="option1">
+      <span class="select-all-label">Select All</span>
+    </label>
+		<button type="button" class="btn  btn-icon refresh-button"><i class="ion-refresh"></i></button>
+	</div>
+	<div class="messages">
+		<table>
+
+
+			<tr *ngFor="let m of inboxMessages" class="side-message-navigation-item little-human shineHover {{m.tag}}">
+				<td class="check-td">
+					<div class="mail-checkbox">
+						<label class="checkbox-inline custom-checkbox nowrap">
+              <input type="checkbox">
+              <span></span>
+            </label>
+					</div>
+				</td>
+				<td class="photo-td">
+					<a [routerLink]="['../item',{'id':m.id}]"><img [src]="m.icon" class="little-human-picture"></a>
+				</td>
+				<td>
+					<a [routerLink]="['../item',{'id':m.id}]">
+						<div class="name-container">
+							<div><span class="name">{{m.name}}</span></div>
+							<div><span class="tag label label-primary {{m.tag}}">{{m.tag}}</span></div>
+						</div>
+					</a>
+				</td>
+				<td>
+					<a [routerLink]="['../item',{'id':m.id}]">
+						<div class="additional-info">
+							<span class="subject"> {{m.subject}}</span>
+						</div>
+					</a>
+				</td>
+				<td>
+					<a [routerLink]="['../item',{'id':m.id}]">
+						<div class="mail-body-part">{{m.body }}</div>
+					</a>
+				</td>
+				<td class="date">
+					<a [routerLink]="['../item',{'id':m.id}]">
+						<span>{{m.date | date}}</span>
+					</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

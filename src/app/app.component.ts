@@ -1,9 +1,9 @@
-/*
- * Angular 2 decorators and services
- */
+import './app.loader.ts';
 import { Component, ViewEncapsulation } from '@angular/core';
-
-import { AppState } from './app.service';
+import { GlobalState } from './global.state';
+import { BaImageLoaderService, BaThemePreloader, BaThemeSpinner } from './theme/services';
+import { layoutPaths } from './theme/theme.constants';
+import { BaThemeConfig } from './theme/theme.config';
 
 /*
  * App Component
@@ -12,64 +12,39 @@ import { AppState } from './app.service';
 @Component({
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: [
-    './app.component.css'
-  ],
+  styles: [require('normalize.css'), require('./app.scss')],
   template: `
-    <nav>
-      <span>
-        <a [routerLink]=" ['./'] ">
-          Index
-        </a>
-      </span>
-      |
-      <span>
-        <a [routerLink]=" ['./home'] ">
-          Home
-        </a>
-      </span>
-      |
-      <span>
-        <a [routerLink]=" ['./mygames'] ">
-          My Games
-        </a>
-      </span>
-      |
-      <span>
-        <a [routerLink]=" ['./creategame'] ">
-          Create Game
-        </a>
-      </span>
-    </nav>
-
-    <main>
+    <main [ngClass]="{'menu-collapsed': isMenuCollapsed}" baThemeRun>
+      <div class="additional-bg"></div>
       <router-outlet></router-outlet>
     </main>
-
-    <footer>
-    </footer>
   `
 })
-export class AppComponent {
-  angularclassLogo = 'assets/img/angularclass-avatar.png';
-  name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
+export class App {
 
-  constructor(
-    public appState: AppState) {
+  isMenuCollapsed: boolean = false;
 
+  constructor(private _state: GlobalState,
+              private _imageLoader: BaImageLoaderService,
+              private _spinner: BaThemeSpinner,
+              private _config:BaThemeConfig) {
+
+    this._loadImages();
+
+    this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
+      this.isMenuCollapsed = isCollapsed;
+    });
   }
 
-  ngOnInit() {
-    console.log('Initial App State', this.appState.state);
+  public ngAfterViewInit(): void {
+    // hide spinner once all loaders are completed
+    BaThemePreloader.load().then((values) => {
+      this._spinner.hide();
+    });
   }
 
+  private _loadImages(): void {
+    // register some loaders
+    BaThemePreloader.registerLoader(this._imageLoader.load(layoutPaths.images.root + 'sky-bg.jpg'));
+  }
 }
-
-/*
- * Please review the https://github.com/AngularClass/angular2-examples/ repo for
- * more angular app examples that you may copy/paste
- * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
- * For help or questions please contact us at @AngularClass on twitter
- * or our chat on Slack at https://AngularClass.com/slack-join
- */
