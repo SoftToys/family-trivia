@@ -12,7 +12,6 @@ const routes: Routes = [
   {
     path: '',
     component: GameComponent,
-    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: GameListComponent },

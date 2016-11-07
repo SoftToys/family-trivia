@@ -1,1 +1,14 @@
 
+.game-row{
+  border-bottom: 1px solid grey;
+  &:hover{
+    background-color: whitesmoke;
+  }
+}
+
+.game-actions a{
+  padding-left: 5px;
+  &::after{
+    content: ' | '
+  }
+}

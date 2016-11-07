@@ -20,7 +20,8 @@ export class IdentityService {
   private _icon: string;
   private _decodedToken: any;
 
-  constructor(private router: Router, private _http: Http, private config: EnvConfig, private facebook: FacebookService, private _bus: MessageBusService) {
+  constructor(private router: Router, private _http: Http, private config: EnvConfig,
+    private facebook: FacebookService, private _bus: MessageBusService) {
     this.icon = localStorage.getItem('triv.icon') || IMAGES_ROOT + '/theme/no-photo.png';
     this.token = localStorage.getItem('triv.token');
 
@@ -73,7 +74,6 @@ export class IdentityService {
 
   public isAuthenticated(): boolean {
     let jwtHelper: JwtHelper = new JwtHelper();
-
     if (this.token && this.token.length > 0 && !jwtHelper.isTokenExpired(this.token)) {
       return true;
     }

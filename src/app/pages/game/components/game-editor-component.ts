@@ -40,7 +40,7 @@ export class GameEditorComponent implements OnInit {
   }
   save() {
     this._questionRepo.addGame(this.game)
-      .subscribe(arg => { this.router.navigate(['']); });
+      .subscribe(arg => { this.router.navigate(['/pages/game/list']); });
 
   }
 

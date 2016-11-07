@@ -1,7 +1,7 @@
 
-import {Question} from './question';
-import {Answer} from './answer';
-import {TriviaItem} from './trivia-item';
+import { Question } from './question';
+import { Answer } from './answer';
+import { TriviaItem } from './trivia-item';
 
 
 /**
@@ -13,6 +13,7 @@ export class TriviaGame {
   _owner: string;
   _name: string;
   _id: string;
+  level: number;
 
   /**
    *

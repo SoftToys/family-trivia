@@ -11,36 +11,19 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
   template: require('./login.html'),
 })
 export class Login {
-
-  public form: FormGroup;
-  public email: AbstractControl;
-  public password: AbstractControl;
-  public submitted: boolean = false;
-
-  constructor(fb: FormBuilder, private _identityService: IdentityService,
-   private _bus: MessageBusService, private router: Router) {
-    this.form = fb.group({
-      'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
-    });
-
-    this.email = this.form.controls['email'];
-    this.password = this.form.controls['password'];
-  }
-
-  public onSubmit(values: Object): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      // your code goes here
-      // console.log(values);
+  constructor(private _identityService: IdentityService,
+    private _bus: MessageBusService, private router: Router) {
+    if (this._identityService.isAuthenticated()) {
+      this.router.navigate(['/pages']);
     }
   }
+
   private facebookLogin() {
     this._identityService.loginFacebook();
     this._bus.events
       .subscribe((m: IMessage) => {
         if (m.eventId === Events.UserRegistered) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/pages']);
         }
       });
   }
