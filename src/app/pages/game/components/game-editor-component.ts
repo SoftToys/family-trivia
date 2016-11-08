@@ -26,7 +26,7 @@ export class GameEditorComponent implements OnInit {
     private router: Router) {
     this._route.params.subscribe(p => this.gameId = p['gameId']);
   }
-
+//
   addItem(newItem: TriviaItem) {
 
     this.game.AddItem(newItem);
