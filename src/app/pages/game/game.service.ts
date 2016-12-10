@@ -1,6 +1,5 @@
+import { UserScore } from './models/user-score';
 import { IdentityService } from './../../identity.service';
-
-//import {TriviaItem, Question, Answer } from '../models/models';
 import { Question } from './models/question';
 import { TriviaItem } from './models/Trivia-Item';
 import { TriviaGame } from './models/trivia-game';
@@ -28,6 +27,32 @@ export class QuestionsHttpRepositoryService implements IQuestionsRepositoryServi
       .map((res: Response) =>
         Object.assign(new TriviaGame(this._identityService.userId), res.json()));
   }
+
+  // creating and initializing array of Environment objects
+  // creating and initializing array of Environment objects
+ _rating: any[] = [
+ {
+   UserName: 'Dan',
+   UserScore: 10,
+   UserRating: 5,
+ },
+ {
+   UserName: 'Amir',
+   UserScore: 15,
+   UserRating: 3,
+ },
+ ];
+
+  getUserScores(): UserScore[]
+  {
+    // return new UserScore{('dan', 8)};
+    return this._rating;
+  }
+
+
+
+
+
   addGame(newGame: TriviaGame): Observable<string> {
     let headers = new Headers();
     this.createAuthorizationHeader(headers);

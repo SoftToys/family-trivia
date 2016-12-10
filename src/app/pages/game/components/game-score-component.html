@@ -1,0 +1,20 @@
+<section class="bg-content">
+<tbody>
+    <tr>aaaaaaaaaa</tr>
+    <tr>
+       <td> {{usersScore.UserName}}</td>
+    <td>{{usersScore.UserScore}}</td>
+    </tr>
+    <tr *ngFor='let user of usersScore'>                        
+                        <td>{{ user.UserName | lowercase }}</td>
+                        <td>{{ user.UserScore }}</td>
+                          <td>
+                            <ai-star [rating]='user.UserRating'
+                            (ratingClicked)='onRatingClicked($event)'>                                    
+                            </ai-star>
+                       </td>                       
+                      
+                    </tr>
+
+</tbody>
+</section> 

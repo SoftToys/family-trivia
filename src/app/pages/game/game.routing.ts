@@ -1,3 +1,4 @@
+import { GameScoreComponent } from './components/game-score-component';
 import { AuthGuard } from './../../auth.guard';
 import { GameEditorComponent } from './components/game-editor-component';
 import { GamePlayComponent } from './components/game-play.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'play/:gameId', component: GamePlayComponent },
       { path: 'create', component: GameEditorComponent },
       { path: 'edit/:gameId', component: GameEditorComponent },
+      { path: 'score', component: GameScoreComponent},
     ]
   }
 ];
