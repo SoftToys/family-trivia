@@ -20,7 +20,11 @@ constructor(private _questionRepo: QuestionsHttpRepositoryService)
 
     }
     ngOnInit() {
-        this.usersScore = this._questionRepo.getUserScores();
+      //  this.usersScore = this._questionRepo.getUserScores();     
+    this._questionRepo.getUserScores()
+      .subscribe(arg =>
+        this.usersScore = arg
+      );
     }
 
      onRatingClicked(message: string): void {

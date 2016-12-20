@@ -2,12 +2,9 @@
 <tbody>
     <tr>aaaaaaaaaa</tr>
     <tr>
-       <td> {{usersScore.UserName}}</td>
-    <td>{{usersScore.UserScore}}</td>
-    </tr>
     <tr *ngFor='let user of usersScore'>                        
-                        <td>{{ user.UserName | lowercase }}</td>
-                        <td>{{ user.UserScore }}</td>
+                        <td>{{ user._userName }}</td>
+                       <!-- <td>{{ user.UserScore | lowercase  }}</td> -->
                           <td>
                             <ai-star [rating]='user.UserRating'
                             (ratingClicked)='onRatingClicked($event)'>                                    

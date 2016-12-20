@@ -28,29 +28,16 @@ export class QuestionsHttpRepositoryService implements IQuestionsRepositoryServi
         Object.assign(new TriviaGame(this._identityService.userId), res.json()));
   }
 
-  // creating and initializing array of Environment objects
-  // creating and initializing array of Environment objects
- _rating: any[] = [
- {
-   UserName: 'Dan',
-   UserScore: 10,
-   UserRating: 5,
- },
- {
-   UserName: 'Amir',
-   UserScore: 15,
-   UserRating: 3,
- },
- ];
-
-  getUserScores(): UserScore[]
+  getUserScores(): Observable<UserScore[]>
   {
     // return new UserScore{('dan', 8)};
-    return this._rating;
+    //return this._rating;
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+
+    return this._http.get(`http://localhost:5000/api/gamemanage/rating`, { headers: headers })
+      .map((res: Response) => <UserScore[]>res.json());
   }
-
-
-
 
 
   addGame(newGame: TriviaGame): Observable<string> {
