@@ -1,17 +1,21 @@
 <section class="bg-content">
-<tbody>
-    <tr>aaaaaaaaaa</tr>
-    <tr>
-    <tr *ngFor='let user of usersScore'>                        
-                        <td>{{ user._userName }}</td>
-                       <!-- <td>{{ user.UserScore | lowercase  }}</td> -->
-                          <td>
-                            <ai-star [rating]='user.UserRating'
-                            (ratingClicked)='onRatingClicked($event)'>                                    
-                            </ai-star>
-                       </td>                       
-                      
-                    </tr>
+  <div class="container-fluid">
+    <div class="row game-row" *ngFor='let user of usersScore'>
+      <div class="col-sm-2 col-md-2">
+        <div class="game-icon">
+          <img src="assets/img/theme/icon/kameleon/Ninja.svg">
+        </div>
+      </div>
+      <div class="col-sm-4 col-md-4 caption">
+        <div class="h3">{{ user.UserName}}</div>
 
-</tbody>
-</section> 
+      </div>
+      <h1 class="col-sm-6 col-md-6 caption">
+        <div class="h3">{{ user.UserScore}}</div>
+        <ai-star [rating]='user.UserRating' (ratingClicked)='onRatingClicked($event)'>
+        </ai-star>
+      </h1>
+    </div>
+  </div>
+
+</section>

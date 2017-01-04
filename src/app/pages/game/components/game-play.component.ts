@@ -68,5 +68,7 @@ export class GamePlayComponent implements OnInit {
     } else {
       this.items[this.current].status = Status.AnsweredWrong;
     }
+
+    this._questionRepo.onAnswerAttempt('aaa', true);
   }
 }
