@@ -64,6 +64,14 @@ export const PAGES_MENU = [
               }
             }
           }
+          {
+            path: 'score',
+            data: {
+              menu: {
+                title: 'Score',
+              }
+            }
+          }
         ]
       },
       //{
