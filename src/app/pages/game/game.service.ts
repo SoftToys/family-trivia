@@ -35,7 +35,7 @@ export class QuestionsHttpRepositoryService implements IQuestionsRepositoryServi
 
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
-    return this._http.get(`http://localhost:5000/api/gamemanage/rating`, { headers: headers })
+    return this._http.get(`http://localhost:5000/api/rating`, { headers: headers })
       .map((res: Response) => this.mapToArray(res.json()));
   }
 
@@ -56,20 +56,21 @@ export class QuestionsHttpRepositoryService implements IQuestionsRepositoryServi
     return this._http.post('http://localhost:5000/api/gamemanage', newGame, { headers: headers })
       .map((res: Response) => res.json());
   }
+
   getTriviaGames(): Observable<TriviaGame[]> {
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
-    return this._http.get(`http://localhost:5000/api/gamemanage`, { headers: headers })
+    return this._http.get(`http://localhost:5000/api/gamemanage/`, { headers: headers })
       .map((res: Response) => <TriviaGame[]>res.json());
   }
 
-  onAnswerAttempt(gameId: string, userAnswer: boolean) {
+  onAnswerAttempt(gameId: string, userAnswer: boolean) : Observable<string> {
 
     let headers = new Headers();
     let aa = new AnswerAttempt(gameId, userAnswer);
     this.createAuthorizationHeader(headers);
-    return this._http.post(`http://localhost:5000/api/gamemanage/bla`, aa, { headers: headers })
-      .map((res: Response) => res.json());
+    return this._http.post('http://localhost:5000/api/gamemanage/onAnswerAttempt', aa, { headers: headers })
+    .map((res: Response) => res.json());
   }
 
   private createAuthorizationHeader(headers: Headers) {

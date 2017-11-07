@@ -69,6 +69,6 @@ export class GamePlayComponent implements OnInit {
       this.items[this.current].status = Status.AnsweredWrong;
     }
 
-    this._questionRepo.onAnswerAttempt('aaa', true);
+    this._questionRepo.onAnswerAttempt(this.gameId, userAnswer.isCorrect).subscribe();
   }
 }
